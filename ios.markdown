@@ -8,9 +8,9 @@
 
 查看源码的方式： xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc main.m -o main-arm64.cpp
 
-arm64 支持iPhone5s及以上
-armV7 支持iPhone4及以上
-armv7s 支持iPhone5及以上
+arm64 支持iPhone5s及以上\n
+armV7 支持iPhone4及以上\n
+armv7s 支持iPhone5及以上\n
 i386 模拟器
 
 x86则是基于因特尔的处理器的台式机器 mac
@@ -31,10 +31,10 @@ NSObject 成员变量为8个字节，实际利用的也是8个字节，但是占
 // 操作系统计算内存对齐
 **内存对齐：Buckets桶（16,32,28,64,80,96最大256）iOS中给OC对象分配内存大小都是16的倍数**
 
-**classGetInstance()**：这个方法返回一个对象至少需要多少内存
-**malloc_size()**：返回系统实际分配内存大小
+**classGetInstance()**：这个方法返回一个对象至少需要多少内存\n
+**malloc_size()**：返回系统实际分配内存大小\n
 
-***结论：我们在计算某个对象占用内存大小时，应先计算其结构体大小，然后根据系统分配内存原则计算它实际分配内存的大小。***
+***结论：我们在计算某个对象占用内存大小时，应先计算其结构体大小，然后根据系统分配内存原则计算它实际分配内存的大小。***\n
 
 ```
 // 实例对象的结构 NSObject implementation
