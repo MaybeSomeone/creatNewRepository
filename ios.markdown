@@ -25,16 +25,16 @@ doule\float\NSString 八个字节
 
 NSObject 成员变量为8个字节，实际利用的也是8个字节，但是占用为16个字节，core-foundation强制至少分配16个字节（64Bit环境下）。
 
-// 计算结构体大小内存对齐
-**内存对齐： 结构体的内存大小是最大内存占用成员的整数倍**
+// 计算结构体大小内存对齐  
+**内存对齐： 结构体的内存大小是最大内存占用成员的整数倍**  
 
-// 操作系统计算内存对齐
-**内存对齐：Buckets桶（16,32,28,64,80,96最大256）iOS中给OC对象分配内存大小都是16的倍数**
+// 操作系统计算内存对齐  
+**内存对齐：Buckets桶（16,32,28,64,80,96最大256）iOS中给OC对象分配内存大小都是16的倍数**  
 
-**classGetInstance()**：这个方法返回一个对象至少需要多少内存\n
-**malloc_size()**：返回系统实际分配内存大小\n
+**classGetInstance()**：这个方法返回一个对象至少需要多少内存  
+**malloc_size()**：返回系统实际分配内存大小  
 
-***结论：我们在计算某个对象占用内存大小时，应先计算其结构体大小，然后根据系统分配内存原则计算它实际分配内存的大小。***\n
+***结论：我们在计算某个对象占用内存大小时，应先计算其结构体大小，然后根据系统分配内存原则计算它实际分配内存的大小。***  
 
 ```
 // 实例对象的结构 NSObject implementation
@@ -68,64 +68,64 @@ classGetInstanceSize -> alignInstanceSize
 // gnu is not unix
 sizeOf(argument)它是一个运算符，在编译期就可以获得该变量占用空间大小。 
 
-### 类对象
-每个类的类对象有且只有一份
-每个类的元类对象有且只有一份
+### 类对象  
+每个类的类对象有且只有一份  
+每个类的元类对象有且只有一份  
 
-类对象存储的信息？
-isa指针
-superClass指针
-类的协议信息  类的对象方法信息
-类的协议信息  类的成员变量信息
+类对象存储的信息？  
+isa指针  
+superClass指针   
+类的协议信息  类的对象方法信息  
+类的协议信息  类的成员变量信息  
 
-对象的分类
-instance（实例对象）
-class （类对象）
-meta-class （元类对象）
+对象的分类  
+instance（实例对象）  
+class （类对象）  
+meta-class （元类对象）  
 
-如何获取元类对象？
-// 从类对象中获取meta class，该方法总是会返回类的类对象
-Class objectMetaClass = object_getClass(objectClass)
+如何获取元类对象？  
+// 从类对象中获取meta class，该方法总是会返回类的类对象  
+Class objectMetaClass = object_getClass(objectClass)  
 
-// class 方法返回的一直是class对象，不管调用多少次都是class对象
-[[objectClass class] class];
+// class 方法返回的一直是class对象，不管调用多少次都是class对象  
+[[objectClass class] class];  
 
-// class和metaClass内存结构一致，仅用途不同
+// class和metaClass内存结构一致，仅用途不同  
 
-metaClass中所存储的信息
-isa
-superClass
-类方法信息
+metaClass中所存储的信息  
+isa  
+superClass  
+类方法信息  
 ...
 
-classIsMetaClass();
+classIsMetaClass();  
 
 
 # 对象的isa指向哪里？
-*1.instance的isa指向class*
-当通过调用对象方法时通过isa找到class,最后找到对象方法进行调用
+*1.instance的isa指向class*  
+当通过调用对象方法时通过isa找到class,最后找到对象方法进行调用  
+ 
+*2.class 的isa指向meta-class*  
+当地调用类方法时，通过isa找到meta-class找到类方法进行调用  
 
-*2.class 的isa指向meta-class*
-当地调用类方法时，通过isa找到meta-class找到类方法进行调用
+class的superClass有什么用？  
+NSObject-> metaClass-> superClass = 指向类对象  
 
-class的superClass有什么用？
-NSObject-> metaClass-> superClass = 指向类对象
+*3.metaClass中的isa全部指向基类的meta-class，根meta-class isa指向自己，superClass指向类对象。*  
 
-*3.metaClass中的isa全部指向基类的meta-class，根meta-class isa指向自己，superClass指向类对象。*
+在调用函数，发送消息时，实际上经过编译之后是不会区分实例方法和类方法的，只会根据方法名进行识别。  
 
-在调用函数，发送消息时，实际上经过编译之后是不会区分实例方法和类方法的，只会根据方法名进行识别。
-
-metaClass中的isa有什么用途？
+metaClass中的isa有什么用途？  
 
 
-## isa中储存地址是否指向的就是类对象的地址?
-不是！！现在版本实例对象和class以及metaClass中的isa全部都需要再&ISA_MASK才能得到class或者metaClass真正的地址值。注意superClass则储存的是正确的地址值。
+## isa中储存地址是否指向的就是类对象的地址?  
+不是！！现在版本实例对象和class以及metaClass中的isa全部都需要再&ISA_MASK才能得到class或者metaClass真正的地址值。注意superClass则储存的是正确的地址值。  
 
-# oc的类信息存放在哪里？
-1.对象方法 属性 成员变量 协议信息 存放在class对象中
-2.类方法 存放在meta-class对象中
-3.成员变量的具体值，存放在instance对象中
-
+# oc的类信息存放在哪里？  
+1.对象方法 属性 成员变量 协议信息 存放在class对象中  
+2.类方法 存放在meta-class对象中  
+3.成员变量的具体值，存放在instance对象中  
+ 
 ```
 // c++结构体和类几乎没有区别
 struct objc_object {
