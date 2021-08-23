@@ -8,7 +8,7 @@
 
 查看源码的方式： xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc main.m -o main-arm64.cpp
 
-arm64 支持iPhone5s及以上\n
+arm64 支持iPhone5s及以上/n
 armV7 支持iPhone4及以上\n
 armv7s 支持iPhone5及以上\n
 i386 模拟器
