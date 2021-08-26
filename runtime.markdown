@@ -132,10 +132,15 @@ NSProxy是一个专门用来进行消息转发的类。
 左边类对象    右边元类
 
 
+super的本质
+objc_msgSendSuper({self, class_getSuperClass([MJPersonClass class])}, sel_registerName('print'))
 
+lldb 命令调试
 
+// 参数放在栈上
+void viewDidLoad(id self, SEL _cmd)
 
-
+125 ~ 128 Runtime内存分布部分视频
 
 
 
