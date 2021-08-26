@@ -113,21 +113,23 @@ isa -> superClass -> cache-> class_rw_t -> methood -> return implementation
 @dynamic 系统不会自动生成set和get方法也不会自动生成成员变量
 
 
-1.介绍一下OC的消息机制
+**1.介绍一下OC的消息机制**
 OC中的方法调用都是转换成了objc_msgSend函数的调用，给reciver（方法调用者）发送了一条消息（selector方法名）
 objc_msgSend底层有三大阶段
 
 消息发送（当前类，弗雷中查找） 动态方法解析、消息转发
 
-2.什么是runtime? 平时项目总有用过吗？
+**2.什么是runtime? 平时项目总有用过吗？**
 NSProxy是一个专门用来进行消息转发的类。
 [instance performaSelector: selector];
 给NSObject 添加一个分类，在forwardIncovation：（NSInvocation *）anInvocation中处理所有unrecognized方法
 
+**isKindOfClass isMemeberOfClassx相关面试题**
+[anyClassObject isKindOfClass: [NSobject Class]] == 1;
+这种情况下的只要是NSObject总是==1，因为NSObject metaClass superClass = [NSObject class];
 
-
-
-
+左边实例对象  右边类兑现
+左边类对象    右边元类
 
 
 
