@@ -14,11 +14,10 @@ runloop在实际开发中的应用
 监控应用卡顿  
 性能优化  
 
-
 NSRunloopCommonModes 并不是一个真正的模式，他只是一个标记
 
 
-
+// NSRunloop的实际应用
 
 
 
