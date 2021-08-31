@@ -46,20 +46,20 @@ __CFRunloopMode *CFRunloopModeRef
 kCFRunloopDefaultMode app的默认mode,通常主线程是在这个mode下运行
 *NSDefaultRunLoopMode*
 *UNTrackingRunLoopMode* 
-*注意：切换mode不会导致runloop的退出，mode的切换也是在内部完成切换。
+*注意*：切换mode不会导致runloop的退出，mode的切换也是在内部完成切换。
 
 ## NSRunloopModeRef 内部数据
 
-Source0 触摸事件的处理
-Source1 基于port的线程间通信
+*Source0* 触摸事件的处理
+*Source1* 基于port的线程间通信
 系统时间捕捉
 
-Timer
+*Timer*
 NSTimer
 perforSelector: withObject: afterDelay
 
 
-ObServers
+*ObServers*
 用于监听Runloop的状态
 UI刷新 BeforeWaiting
 AutoRealese pool BeforeWaiting
