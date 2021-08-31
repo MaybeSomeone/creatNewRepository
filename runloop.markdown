@@ -51,7 +51,7 @@ kCFRunloopDefaultMode app的默认mode,通常主线程是在这个mode下运行
 ## NSRunloopModeRef 内部数据
 
 **Source0** 触摸事件的处理
-***Source1** 基于port的线程间通信
+**Source1** 基于port的线程间通信
 系统时间捕捉
 
 **Timer**
